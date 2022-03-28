@@ -2,6 +2,7 @@ package com.springboot.blog.service;
 
 import com.springboot.blog.dto.PostDto;
 import com.springboot.blog.entity.Post;
+import com.springboot.blog.exception.PostNotFoundException;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.util.PostConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,38 @@ public class PostServiceImpl implements PostService {
         return posts.stream()
                 .map(post -> postConverter.mapToDto(post))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public PostDto getPostById(Long id) {
+        return postRepository.findById(id)
+                .map(post -> postConverter.mapToDto(post))
+                .orElseThrow(() -> new PostNotFoundException("post id: " + id + " is not found."));
+    }
+
+    @Override
+    public PostDto updatePost(Long id, PostDto postDto) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new PostNotFoundException("post id: " + id + " is not found."));
+
+//        if (Objects.nonNull(postDto.getContent())) {
+//            post.setContent(postDto.getContent());
+//        }
+
+        post.setContent(postDto.getContent());
+        post.setTitle(postDto.getTitle());
+        post.setDescription(postDto.getDescription());
+
+        postRepository.save(post);
+
+        return postConverter.mapToDto(post);
+    }
+
+    @Override
+    public void deletePostById(Long id) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new PostNotFoundException("post id: " + id + " is not found."));
+
+        postRepository.delete(post);
     }
 }
