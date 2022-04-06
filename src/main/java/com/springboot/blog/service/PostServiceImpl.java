@@ -6,6 +6,9 @@ import com.springboot.blog.exception.PostNotFoundException;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.util.PostConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,8 +40,13 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDto> getAllPosts() {
-        List<Post> posts = postRepository.findAll();
+    public List<PostDto> getAllPosts(Integer pageNo, Integer pageSize) {
+        // create pageable instance
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        Page<Post> page = postRepository.findAll(pageable);
+
+        // get content from page object
+        List<Post> posts = page.getContent();
 
         return posts.stream()
                 .map(post -> postConverter.mapToDto(post))
@@ -56,10 +64,6 @@ public class PostServiceImpl implements PostService {
     public PostDto updatePost(Long id, PostDto postDto) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new PostNotFoundException("post id: " + id + " is not found."));
-
-//        if (Objects.nonNull(postDto.getContent())) {
-//            post.setContent(postDto.getContent());
-//        }
 
         post.setContent(postDto.getContent());
         post.setTitle(postDto.getTitle());
