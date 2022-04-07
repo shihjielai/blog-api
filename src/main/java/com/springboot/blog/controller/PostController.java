@@ -1,6 +1,7 @@
 package com.springboot.blog.controller;
 
 import com.springboot.blog.dto.PostDto;
+import com.springboot.blog.response.PostResponse;
 import com.springboot.blog.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +10,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Min;
-import java.util.List;
 
 @RestController
 @Validated
@@ -29,7 +29,7 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PostDto>> getAllPosts(
+    public ResponseEntity<PostResponse> getAllPosts(
             @RequestParam(defaultValue = "1", required = false) @Min(1) Integer pageNo,
             @RequestParam(defaultValue = "3", required = false) Integer pageSize
     ) {
