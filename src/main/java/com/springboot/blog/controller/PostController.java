@@ -1,5 +1,6 @@
 package com.springboot.blog.controller;
 
+import com.springboot.blog.constant.AppConstants;
 import com.springboot.blog.dto.PostDto;
 import com.springboot.blog.response.PostResponse;
 import com.springboot.blog.service.PostService;
@@ -30,10 +31,12 @@ public class PostController {
 
     @GetMapping
     public ResponseEntity<PostResponse> getAllPosts(
-            @RequestParam(defaultValue = "1", required = false) @Min(1) Integer pageNo,
-            @RequestParam(defaultValue = "3", required = false) Integer pageSize
+            @RequestParam(defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) @Min(1) Integer pageNo,
+            @RequestParam(defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) Integer pageSize,
+            @RequestParam(defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
+            @RequestParam(defaultValue = AppConstants.DEFAULT_SORT_DIRECTION, required = false) String sortDirection
     ) {
-        return new ResponseEntity<>(postService.getAllPosts(pageNo, pageSize), HttpStatus.OK);
+        return new ResponseEntity<>(postService.getAllPosts(pageNo, pageSize, sortBy, sortDirection), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
