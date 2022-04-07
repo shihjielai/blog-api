@@ -5,10 +5,10 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class PostDto {
+public class CommentDto {
 
-    private String title;
-    private String description;
+    private String name;
+    private String email;
     private String content;
     private LocalDateTime createdTime;
     private LocalDateTime updatedTime;

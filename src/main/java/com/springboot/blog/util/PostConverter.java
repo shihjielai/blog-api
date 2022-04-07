@@ -12,6 +12,8 @@ public class PostConverter {
         postDto.setTitle(post.getTitle());
         postDto.setContent(post.getContent());
         postDto.setDescription(post.getDescription());
+        postDto.setCreatedTime(post.getCreatedTime());
+        postDto.setUpdatedTime(post.getUpdatedTime());
         return postDto;
     }
 
