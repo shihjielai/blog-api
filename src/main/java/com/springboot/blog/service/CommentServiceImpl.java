@@ -4,7 +4,6 @@ import com.springboot.blog.dto.CommentDto;
 import com.springboot.blog.entity.Comment;
 import com.springboot.blog.entity.Post;
 import com.springboot.blog.exception.BlogApiException;
-import com.springboot.blog.exception.PostNotFoundException;
 import com.springboot.blog.exception.ResourceNotFoundException;
 import com.springboot.blog.repository.CommentRepository;
 import com.springboot.blog.repository.PostRepository;
@@ -36,7 +35,7 @@ public class CommentServiceImpl implements CommentService {
 
         // retrieve post entity by id
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new PostNotFoundException("post id: " + postId + " is not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("post", "id", postId));
 
         // set post the comment entity
         comment.setPost(post);
@@ -95,7 +94,7 @@ public class CommentServiceImpl implements CommentService {
 
         // retrieve post entity by id
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new PostNotFoundException("post id: " + postId + " is not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("post", "id", postId));
 
         // retrieve comment by id
         Comment comment = commentRepository.findById(commentId)
