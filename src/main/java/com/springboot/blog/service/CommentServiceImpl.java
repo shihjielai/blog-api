@@ -64,17 +64,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentDto getCommentById(Long postId, Long commentId) {
 
-        // retrieve post entity by id
-        Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new PostNotFoundException("post id: " + postId + " is not found."));
-
-        // retrieve comment by id
-        Comment comment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new ResourceNotFoundException("comment", "id", commentId));
-
-        if (!comment.getPost().getId().equals(post.getId())) {
-            throw new BlogApiException("this comment (id: " + commentId + ") does not belong to post(id: " + postId + ").");
-        }
+        Comment comment = validatePostAndComment(postId, commentId);
 
         return commentConverter.mapToDto(comment);
     }
@@ -82,6 +72,26 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentDto updateComment(Long postId, Long commentId, CommentDto commentDto) {
 
+        Comment comment = validatePostAndComment(postId, commentId);
+
+        comment.setName(commentDto.getName());
+        comment.setEmail(commentDto.getEmail());
+        comment.setContent(commentDto.getContent());
+
+        commentRepository.save(comment);
+
+        return commentConverter.mapToDto(comment);
+    }
+
+    @Override
+    public void deleteComment(Long postId, Long commentId) {
+
+        Comment comment = validatePostAndComment(postId, commentId);
+
+        commentRepository.delete(comment);
+    }
+
+    private Comment validatePostAndComment(Long postId, Long commentId) {
         // retrieve post entity by id
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new PostNotFoundException("post id: " + postId + " is not found."));
@@ -94,12 +104,6 @@ public class CommentServiceImpl implements CommentService {
             throw new BlogApiException("this comment does not belong to this post.");
         }
 
-        comment.setName(commentDto.getName());
-        comment.setEmail(commentDto.getEmail());
-        comment.setContent(commentDto.getContent());
-
-        commentRepository.save(comment);
-
-        return commentConverter.mapToDto(comment);
+        return comment;
     }
 }
