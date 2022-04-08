@@ -92,6 +92,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     private Comment validatePostAndComment(Long postId, Long commentId) {
+
         // retrieve post entity by id
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new PostNotFoundException("post id: " + postId + " is not found."));
