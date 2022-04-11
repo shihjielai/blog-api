@@ -1,10 +1,10 @@
 package com.springboot.blog.service;
 
-import com.springboot.blog.dto.PostDto;
 import com.springboot.blog.entity.Post;
 import com.springboot.blog.exception.ResourceNotFoundException;
+import com.springboot.blog.payload.PostDto;
+import com.springboot.blog.payload.PostResponse;
 import com.springboot.blog.repository.PostRepository;
-import com.springboot.blog.response.PostResponse;
 import com.springboot.blog.util.PostConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

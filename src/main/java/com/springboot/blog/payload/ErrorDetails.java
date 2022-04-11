@@ -13,5 +13,5 @@ public class ErrorDetails {
 
     private LocalDateTime timestamp;
     private String message;
-    private String request_uri;
+    private String requestUrl;
 }

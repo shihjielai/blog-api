@@ -1,7 +1,7 @@
 package com.springboot.blog.util;
 
-import com.springboot.blog.dto.PostDto;
 import com.springboot.blog.entity.Post;
+import com.springboot.blog.payload.PostDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 

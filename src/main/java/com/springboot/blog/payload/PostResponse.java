@@ -1,6 +1,5 @@
-package com.springboot.blog.response;
+package com.springboot.blog.payload;
 
-import com.springboot.blog.dto.PostDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

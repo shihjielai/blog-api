@@ -1,7 +1,7 @@
 package com.springboot.blog.util;
 
-import com.springboot.blog.dto.CommentDto;
 import com.springboot.blog.entity.Comment;
+import com.springboot.blog.payload.CommentDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
