@@ -53,14 +53,14 @@ class PostServiceTest {
     @Test
     void givenPostDtoObject_whenSave_thenReturnPostDtoResponse() {
 
-        Mockito.when(postConverter.mapToEntity(postDto))
-                .thenReturn(post);
+        BDDMockito.given(postConverter.mapToEntity(postDto))
+                .willReturn(post);
 
-        Mockito.when(postRepository.save(post))
-                .thenReturn(post);
+        BDDMockito.given(postRepository.save(post))
+                .willReturn(post);
 
-        Mockito.when(postConverter.mapToDto(post))
-                .thenReturn(postDto);
+        BDDMockito.given(postConverter.mapToDto(post))
+                .willReturn(postDto);
 
         PostDto postResponse = postService.createPost(postDto);
         Assertions.assertThat(postResponse).isNotNull();
@@ -107,7 +107,7 @@ class PostServiceTest {
     }
 
     @Test
-    void getPostById() {
+    void givenPostId_whenGetById_thenReturnPostDto() {
 
         Mockito.when(postConverter.mapToDto(post))
                 .thenReturn(postDto);
