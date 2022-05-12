@@ -1,5 +1,6 @@
 package com.springboot.blog.controller;
 
+import com.springboot.blog.constant.RegisterRole;
 import com.springboot.blog.entity.Role;
 import com.springboot.blog.entity.User;
 import com.springboot.blog.payload.JwtAuthResponse;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 @Api(value = "Auth controller exposes signin and signup REST APIs.")
@@ -80,6 +82,14 @@ public class AuthController {
         user.setEmail(signUpDto.getEmail());
         user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
 
+        String roleName = signUpDto.getRole();
+
+        RegisterRole[] values = RegisterRole.ROLE_ADMIN.getDeclaringClass().getEnumConstants();
+
+        if (Arrays.stream(values).noneMatch(registerRole -> registerRole.name().equals(roleName))) {
+            return new ResponseEntity<>("Role value must be either one of " + Arrays.toString(values), HttpStatus.BAD_REQUEST);
+        }
+        
         Role roles = roleRepository.findByName(signUpDto.getRole()).get();
         user.setRoles(Collections.singleton(roles));
 

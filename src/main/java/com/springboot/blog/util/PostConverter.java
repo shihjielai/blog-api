@@ -3,6 +3,7 @@ package com.springboot.blog.util;
 import com.springboot.blog.entity.Post;
 import com.springboot.blog.payload.PostDto;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -10,20 +11,15 @@ public class PostConverter {
 
     private final ModelMapper mapper;
 
+    @Autowired
     public PostConverter(ModelMapper mapper) {
         this.mapper = mapper;
     }
 
-
     public PostDto mapToDto(Post post) {
 
         PostDto postDto = mapper.map(post, PostDto.class);
-//        PostDto postDto = new PostDto();
-//        postDto.setId(post.getId());
-//        postDto.setTitle(post.getTitle());
-//        postDto.setContent(post.getContent());
-//        postDto.setDescription(post.getDescription());
-//        postDto.setUpdatedTime(post.getUpdatedTime());
+
         return postDto;
     }
 
@@ -31,11 +27,6 @@ public class PostConverter {
 
         Post post = mapper.map(postDto, Post.class);
 
-//        Post post = new Post();
-//        post.setId(postDto.getId());
-//        post.setTitle(postDto.getTitle());
-//        post.setContent(postDto.getContent());
-//        post.setDescription(postDto.getDescription());
         return post;
     }
 }

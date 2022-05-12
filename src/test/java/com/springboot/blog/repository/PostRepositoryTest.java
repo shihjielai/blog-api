@@ -2,7 +2,6 @@ package com.springboot.blog.repository;
 
 import com.springboot.blog.entity.Post;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -32,7 +31,6 @@ class PostRepositoryTest {
 
     // JUnit test for save post operation
     @Test
-    @DisplayName("save post operation")
     public void givenPost_whenSave_thenReturnSavedPost() {
 
         // when - action or the behavior that we are going to test

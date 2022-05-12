@@ -33,14 +33,11 @@ public class CommentServiceImpl implements CommentService {
 
         Comment comment = commentConverter.mapToEntity(commentDto);
 
-        // retrieve post entity by id
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new ResourceNotFoundException("post", "id", postId));
 
-        // set post the comment entity
         comment.setPost(post);
 
-        // save comment entity to database
         commentRepository.save(comment);
 
         return commentConverter.mapToDto(comment);
@@ -49,10 +46,8 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<CommentDto> getCommentsByPostId(Long postId) {
 
-        // retrieve comments by postId
         List<Comment> comments = commentRepository.findByPostId(postId);
 
-        // convert list of comment entities to list of comment dto
         List<CommentDto> commentDtos = comments.stream()
                 .map(comment -> commentConverter.mapToDto(comment))
                 .collect(Collectors.toList());
@@ -92,11 +87,9 @@ public class CommentServiceImpl implements CommentService {
 
     private Comment validatePostAndComment(Long postId, Long commentId) {
 
-        // retrieve post entity by id
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new ResourceNotFoundException("post", "id", postId));
 
-        // retrieve comment by id
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new ResourceNotFoundException("comment", "id", commentId));
 

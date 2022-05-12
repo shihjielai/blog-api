@@ -76,23 +76,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
-    //    @Override
-//    @Bean
-//    protected UserDetailsService userDetailsService() {
-//
-//        UserDetails jay = User.builder()
-//                .username("jay")
-//                .password(passwordEncoder.encode("password"))
-//                .roles("ADMIN")
-//                .build();
-//
-//        UserDetails jenny = User.builder()
-//                .username("jenny")
-//                .password(passwordEncoder.encode("password"))
-//                .roles("USER")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(jay, jenny);
-//    }
 }

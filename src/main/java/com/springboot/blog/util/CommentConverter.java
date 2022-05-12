@@ -3,6 +3,7 @@ package com.springboot.blog.util;
 import com.springboot.blog.entity.Comment;
 import com.springboot.blog.payload.CommentDto;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -10,6 +11,7 @@ public class CommentConverter {
 
     private final ModelMapper mapper;
 
+    @Autowired
     public CommentConverter(ModelMapper mapper) {
         this.mapper = mapper;
     }
@@ -18,23 +20,13 @@ public class CommentConverter {
 
         CommentDto commentDto = mapper.map(comment, CommentDto.class);
 
-//        CommentDto commentDto = new CommentDto();
-//        commentDto.setId(comment.getId());
-//        commentDto.setName(comment.getName());
-//        commentDto.setEmail(comment.getEmail());
-//        commentDto.setContent(comment.getContent());
-//        commentDto.setUpdatedTime(comment.getUpdatedTime());
         return commentDto;
     }
 
     public Comment mapToEntity(CommentDto commentDto) {
 
         Comment comment = mapper.map(commentDto, Comment.class);
-//        Comment comment = new Comment();
-//        comment.setId(commentDto.getId());
-//        comment.setName(commentDto.getName());
-//        comment.setEmail(commentDto.getEmail());
-//        comment.setContent(commentDto.getContent());
+
         return comment;
     }
 }

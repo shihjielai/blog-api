@@ -59,7 +59,7 @@ class PostControllerTest {
 
     @Test
     @WithMockUser(roles = {"ADMIN"})
-    public void givenPostDtoObject_whenSave_thenReturnSaved() throws Exception {
+    public void givenPostDtoObject_whenSave_thenReturnSavedPostDto() throws Exception {
 
         BDDMockito.given(postService.createPost(ArgumentMatchers.any(PostDto.class)))
                 .willAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
