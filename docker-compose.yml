@@ -1,0 +1,21 @@
+version: "3"
+services:
+  blog-api-db:
+    image: mysql
+    container_name: mysql
+    environment: 
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_PASSWROD=root
+      - MYSQL_DATABASE=qrcode
+      - TZ=Asia/Taipei
+    ports:
+      - "3306:3306"
+    restart: always
+    volumes:
+      - "/home/ubuntu/blog/mysql_data:/var/lib/mysql"
+  blog-api-web:
+    image: blog-api
+    container_name: blog-api
+    ports:
+      - "8088:8088"
+    restart: always
