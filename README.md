@@ -10,3 +10,6 @@ health check: http://ec2-54-238-198-112.ap-northeast-1.compute.amazonaws.com/hel
 
 依身份權限有不同功能操作 (ROLE_ADMIN, ROLE_USER)
 
+ROLE_ADMIN: username: jay, email:jay@gmail.com, password: password -> 能新增、更新、刪除 Post
+
+ROLE_USER: username: jenny, email:jenny@gmail.com, password: password
