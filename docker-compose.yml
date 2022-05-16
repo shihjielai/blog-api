@@ -3,10 +3,10 @@ services:
   blog-api-db:
     image: mysql
     container_name: mysql
-    environment: 
+    environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_PASSWROD=root
-      - MYSQL_DATABASE=qrcode
+      - MYSQL_DATABASE=myblog
       - TZ=Asia/Taipei
     ports:
       - "3306:3306"
