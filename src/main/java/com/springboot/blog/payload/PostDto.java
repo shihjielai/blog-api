@@ -8,7 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @ApiModel(description = "Post model information")
@@ -32,9 +32,9 @@ public class PostDto {
     @NotBlank
     private String content;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Taipei")
     @UpdateTimestamp
-    private LocalDateTime updatedTime;
-    
+    private ZonedDateTime updatedTime;
+
     private List<CommentDto> comments;
 }
