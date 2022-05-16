@@ -1,12 +1,14 @@
 package com.springboot.blog.payload;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @ApiModel(description = "Post model information")
@@ -26,10 +28,13 @@ public class PostDto {
     @Size(min = 10, message = "post description should gave at least 10 characters.")
     private String description;
 
-    @ApiModelProperty(value = "Blog post content    ")
+    @ApiModelProperty(value = "Blog post content")
     @NotBlank
     private String content;
 
-    private LocalDateTime updatedTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Taipei")
+    @UpdateTimestamp
+    private ZonedDateTime updatedTime;
+
     private List<CommentDto> comments;
 }
